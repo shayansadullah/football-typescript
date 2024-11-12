@@ -11,7 +11,8 @@ interface FootballClub {
     goalDifference: number,
     points: number
 }
-const clubs = ['Liverpool', 'Man City', 'Arsenal', 'Chelsea', 'Man Utd', 'Tottenham', 'Brighton', 'Crystal Palace', 'Everton', 'Wolves'];
+
+const clubs = ['Liverpool', 'Man City', 'Arsenal', 'Chelsea', 'Man Utd', 'Tottenham', 'Brighton', 'Crystal Palace', 'Everton', 'Wolves', 'Brentford', 'Southampton', 'Notts Forest', 'Fullham', 'Newcastle', 'Aston Villa', 'Bournemouth', 'West Ham', 'Leicester City', 'Crystal Palace', 'Ipswich Town', 'West Ham'];
 const clubMap = new Map<string, FootballClub>();
 
 clubs.forEach(club => {
@@ -29,4 +30,4 @@ clubs.forEach(club => {
         points: 0});
 });
 
-console.log(clubs);
+console.log(clubs.sort());
