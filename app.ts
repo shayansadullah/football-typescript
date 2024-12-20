@@ -40,18 +40,21 @@ class FootballGame {
         let allMatches: Match[] = [];
         clubs.forEach((club, index) => {
             let otherClubs: string[] = [];
-            otherClubs = this.getOtherClubs(index);
+            otherClubs = this.getAllOtherClubsExceptIndexedClub(index);
+            console.log(`Current club: ${index}: ${club}`);
+            console.log(`Other Clubs: ${otherClubs}`);
             let clubMatches: Match[] = [];
             otherClubs.forEach(otherClub => {
                 clubMatches.push({homeTeam: club, awayTeam: otherClub});
             });
             allMatches = allMatches.concat(clubMatches);
         });
-        console.log(allMatches);
+        //console.log(allMatches);
         return allMatches;
     }
 
-    getOtherClubs(index: number): string[] {
+    private getAllOtherClubsExceptIndexedClub(index: number): string[] {
+        console.log(`Clubs: ${clubs[index]}`);
         return clubs.filter((_, i) => i !== index);
     }
 }
@@ -63,8 +66,11 @@ const footballGame = new FootballGame();
 //club results to 0 as no matched have been played yet
 const initialisedClubs = footballGame.initialiseClubs(clubs);
 const arrayAllclubsInitialised = Array.from(initialisedClubs);
-console.log(arrayAllclubsInitialised.sort());
+//console.log(arrayAllclubsInitialised.sort());
 
 //Get a list of all the matches that need to be played
 const allMatches = footballGame.initaliseMatches(clubs);
+
+//Simulate the matches
+
 
