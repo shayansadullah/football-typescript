@@ -55,16 +55,15 @@ class FootballGame {
     return ArrayOfAllClubs.filter((_, i) => i !== index);
   }
 
-  matchesToPlay(): Match[] {
+  matchesToPlay(week: number): [number, Match[]] {
     //Mix the set of matches:
-    const mixedMatches: Match[] = [];
-    const allclubs = ArrayOfAllClubs;
+    const matchesForTheWeek: Match[] = [];
     ArrayOfAllClubs.forEach((_, index) => {
       if (index % 2 === 0) {
-        mixedMatches.push({ homeTeam: ArrayOfAllClubs[index], awayTeam: ArrayOfAllClubs[index + 1] });
+        matchesForTheWeek.push({ homeTeam: ArrayOfAllClubs[index], awayTeam: ArrayOfAllClubs[index + 1] });
       }
     });
-    return mixedMatches;
+    return [week, matchesForTheWeek];
   }
 
   filterMatchesToBePlayed(allMatches: Match[], matchesToPlay: Match[]): Match[] {
@@ -105,17 +104,34 @@ const ArrayOfAllClubs = [
   'Leicester City',
   'Ipswich Town',
 ];
+
+let continuingListOfAllMatches: Match[] = [];
+
+//Initialise the football game:
 const footballGame = new FootballGame();
 
-//Get a list of all the clubs and initialise:
+//Array of all clubs:
+console.log(`Array of all clubs: ${JSON.stringify(ArrayOfAllClubs)}`);
+
+//Get a list of all the clubs and initialise these clubs:
 const arrayAllclubsInitialised = footballGame.initialiseClubs(ArrayOfAllClubs);
+console.log(`Initialised Clubs: ${JSON.stringify(arrayAllclubsInitialised)}`);
 
 //Get a list of all the matches that need to be played:
 const allMatches = footballGame.createAllMatches(ArrayOfAllClubs);
+console.log(`All Matches: ${JSON.stringify(allMatches)}`);
 
-//Get a list of matches left to play:
-const matchesToPlay = footballGame.matchesToPlay();
-console.log(`Matches to Play: ${JSON.stringify(matchesToPlay)}`);
+//Get a list of matches to play for a set period:
+const matchWeeks = 38;
+for (let i = 1; i <= matchWeeks; i++) {
+  const matchestoPlay = footballGame.matchesToPlay(i);
+  console.log(`Week: ${matchestoPlay[0]}: Matches to Play: ${JSON.stringify(matchestoPlay[1])}`);
+}
 
-const filterMatchesToBePlayed = footballGame.filterMatchesToBePlayed(allMatches, matchesToPlay);
-console.log(`Filtered matches to be played: ${JSON.stringify(filterMatchesToBePlayed)}`);
+//const matchestoPlay = footballGame.matchesToPlay(1);
+//console.log(`Week: ${matchestoPlay[0]}: Matches to Play: ${JSON.stringify(matchestoPlay[1])}`);
+
+//Filter matches to be played:
+//const filterMatchesToBePlayed = footballGame.filterMatchesToBePlayed(allMatches, matchestoPlay[1]);
+//continuingListOfAllMatches = filterMatchesToBePlayed;
+//console.log(`Continuing List of All Matches: ${JSON.stringify(continuingListOfAllMatches)}`);
