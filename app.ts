@@ -66,6 +66,19 @@ class FootballGame {
     return [week, matchesForTheWeek];
   }
 
+  matchesToPlay2(week: number, ArrayOfAllClubs: string[], allMatches: Match[]) {
+    console.log(`Array of all clubs: ${ArrayOfAllClubs}`);
+    console.log(`All the matches: ${JSON.stringify(allMatches)}`);
+  }
+
+  rotateArray(arr: string[]): string[] {
+    const firstElement = arr.shift();
+    if (firstElement) {
+      arr.push(firstElement);
+    }
+    return arr;
+  }
+
   filterMatchesToBePlayed(allMatches: Match[], matchesToPlay: Match[]): Match[] {
     let filteredMatches: Match[] = [];
     filteredMatches = allMatches;
@@ -111,22 +124,31 @@ let continuingListOfAllMatches: Match[] = [];
 const footballGame = new FootballGame();
 
 //Array of all clubs:
-console.log(`Array of all clubs: ${JSON.stringify(ArrayOfAllClubs)}`);
+//console.log(`Array of all clubs: ${JSON.stringify(ArrayOfAllClubs)}`);
 
 //Get a list of all the clubs and initialise these clubs:
 const arrayAllclubsInitialised = footballGame.initialiseClubs(ArrayOfAllClubs);
-console.log(`Initialised Clubs: ${JSON.stringify(arrayAllclubsInitialised)}`);
+//console.log(`Initialised Clubs: ${JSON.stringify(arrayAllclubsInitialised)}`);
 
 //Get a list of all the matches that need to be played:
 const allMatches = footballGame.createAllMatches(ArrayOfAllClubs);
-console.log(`All Matches: ${JSON.stringify(allMatches)}`);
+//console.log(`All Matches: ${JSON.stringify(allMatches)}`);
+
+let rotatedArray = [...ArrayOfAllClubs];
+console.log(rotatedArray.join(','));
+for (let i = 0; i < ArrayOfAllClubs.length; i++) {
+  rotatedArray = footballGame.rotateArray(rotatedArray);
+  console.log(rotatedArray.join(','));
+}
+
+//footballGame.matchesToPlay2(1, ArrayOfAllClubs, allMatches);
 
 //Get a list of matches to play for a set period:
-const matchWeeks = 38;
-for (let i = 1; i <= matchWeeks; i++) {
-  const matchestoPlay = footballGame.matchesToPlay(i);
-  console.log(`Week: ${matchestoPlay[0]}: Matches to Play: ${JSON.stringify(matchestoPlay[1])}`);
-}
+//const matchWeeks = 38;
+//for (let i = 1; i <= matchWeeks; i++) {
+//  const matchestoPlay = footballGame.matchesToPlay(i);
+//  console.log(`Week: ${matchestoPlay[0]}: Matches to Play: ${JSON.stringify(matchestoPlay[1])}`);
+//}
 
 //const matchestoPlay = footballGame.matchesToPlay(1);
 //console.log(`Week: ${matchestoPlay[0]}: Matches to Play: ${JSON.stringify(matchestoPlay[1])}`);
