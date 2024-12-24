@@ -36,41 +36,49 @@ class FootballGame {
         return clubMap;
     }
 
-    initaliseMatches(clubs: string[]): Match[] {
+    createAllMatches(clubs: string[]): Match[] {
         let allMatches: Match[] = [];
         clubs.forEach((club, index) => {
             let otherClubs: string[] = [];
             otherClubs = this.getAllOtherClubsExceptIndexedClub(index);
-            console.log(`Current club: ${index}: ${club}`);
-            console.log(`Other Clubs: ${otherClubs}`);
             let clubMatches: Match[] = [];
             otherClubs.forEach(otherClub => {
                 clubMatches.push({homeTeam: club, awayTeam: otherClub});
             });
             allMatches = allMatches.concat(clubMatches);
         });
-        //console.log(allMatches);
         return allMatches;
     }
 
     private getAllOtherClubsExceptIndexedClub(index: number): string[] {
-        console.log(`Clubs: ${clubs[index]}`);
-        return clubs.filter((_, i) => i !== index);
+        return ArrayOfAllClubs.filter((_, i) => i !== index);
     }
 }
 
-const clubs = ['Liverpool', 'Man City', 'Arsenal', 'Chelsea', 'Man Utd', 'Tottenham', 'Brighton', 'Crystal Palace', 'Everton', 'Wolves', 'Brentford', 'Southampton', 'Notts Forest', 'Fullham', 'Newcastle', 'Aston Villa', 'Bournemouth', 'West Ham', 'Leicester City', 'Crystal Palace', 'Ipswich Town', 'West Ham'];
+const ArrayOfAllClubs = ['Liverpool', 'Man City', 'Arsenal', 'Chelsea', 'Man Utd', 'Tottenham', 'Brighton', 'Crystal Palace', 'Everton', 'Wolves', 'Brentford', 'Southampton', 'Notts Forest', 'Fullham', 'Newcastle', 'Aston Villa', 'Bournemouth', 'West Ham', 'Leicester City', 'Ipswich Town'];
 const footballGame = new FootballGame();
 
 //Get a list of all the clubs and initialise the
 //club results to 0 as no matched have been played yet
-const initialisedClubs = footballGame.initialiseClubs(clubs);
+const initialisedClubs = footballGame.initialiseClubs(ArrayOfAllClubs);
 const arrayAllclubsInitialised = Array.from(initialisedClubs);
-//console.log(arrayAllclubsInitialised.sort());
 
-//Get a list of all the matches that need to be played
-const allMatches = footballGame.initaliseMatches(clubs);
+//Get a list of all the matches that need to be played:
+const allMatches = footballGame.createAllMatches(ArrayOfAllClubs);
 
-//Simulate the matches
+//Mix the set of matches:
+const mixedMatches: Match[] = [];
+const allclubs = ArrayOfAllClubs;
+let allMatchesLeft = allMatches;
+ArrayOfAllClubs.forEach((_, index) => {
+    if (index % 2 === 0) {
+        mixedMatches.push({homeTeam: ArrayOfAllClubs[index], awayTeam: ArrayOfAllClubs[index+1]});
+    }
+}
+);
 
 
+console.log(mixedMatches);
+console.log(allclubs);
+console.log(allMatches);
+console.log(allMatchesLeft)
