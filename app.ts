@@ -17,7 +17,7 @@ interface Match {
 }
 
 class FootballGame {
-  initialiseClubs(clubs: string[]): Map<string, FootballClub> {
+  initialiseClubs(clubs: string[]): [string, FootballClub][] {
     const clubMap = new Map<string, FootballClub>();
     clubs.forEach(club => {
       clubMap.set(club, {
@@ -34,7 +34,7 @@ class FootballGame {
         points: 0,
       });
     });
-    return clubMap;
+    return Array.from(clubMap);
   }
 
   createAllMatches(clubs: string[]): Match[] {
@@ -67,7 +67,7 @@ class FootballGame {
     return mixedMatches;
   }
 
-  filteredPlayedMatches(allMatches: Match[], matchesToPlay: Match[]): Match[] {
+  filterMatchesToBePlayed(allMatches: Match[], matchesToPlay: Match[]): Match[] {
     let filteredMatches: Match[] = [];
     filteredMatches = allMatches;
     matchesToPlay.forEach((match, index) => {
@@ -107,19 +107,15 @@ const ArrayOfAllClubs = [
 ];
 const footballGame = new FootballGame();
 
-//Get a list of all the clubs and initialise the
-//club results to 0 as no matched have been played yet
-const initialisedClubs = footballGame.initialiseClubs(ArrayOfAllClubs);
-const arrayAllclubsInitialised = Array.from(initialisedClubs);
+//Get a list of all the clubs and initialise:
+const arrayAllclubsInitialised = footballGame.initialiseClubs(ArrayOfAllClubs);
 
 //Get a list of all the matches that need to be played:
 const allMatches = footballGame.createAllMatches(ArrayOfAllClubs);
 
 //Get a list of matches left to play:
 const matchesToPlay = footballGame.matchesToPlay();
-//console.log(`All Matches: ${JSON.stringify(allMatches)}`);
-
 console.log(`Matches to Play: ${JSON.stringify(matchesToPlay)}`);
 
-const filteredPlayedMatches = footballGame.filteredPlayedMatches(allMatches, matchesToPlay);
-console.log(`Filtered Played Matches: ${JSON.stringify(filteredPlayedMatches)}`);
+const filterMatchesToBePlayed = footballGame.filterMatchesToBePlayed(allMatches, matchesToPlay);
+console.log(`Filtered matches to be played: ${JSON.stringify(filterMatchesToBePlayed)}`);
