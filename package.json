@@ -6,12 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "lite-server",
-    "tsconfig": "npx tsc -p tsconfig.json --noEmit -w"
+    "tsconfig": "npx tsc -p tsconfig.json --noEmit -w",
+    "prettier": "npx prettier . --write"
   },
   "author": "Maximilian Schwarzmüller",
   "license": "ISC",
   "devDependencies": {
-    "lite-server": "^2.5.4"
+    "lite-server": "^2.5.4",
+    "prettier": "^3.4.2"
   },
   "dependencies": {
     "tsconfig": "^7.0.0"
