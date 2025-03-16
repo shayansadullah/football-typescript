@@ -45,6 +45,7 @@ class FootballGame {
       let clubMatches: Match[] = [];
       otherClubs.forEach(otherClub => {
         clubMatches.push({ homeTeam: club, awayTeam: otherClub });
+        console.log(`Club Matches for home team ${club}: ${JSON.stringify(clubMatches.length)}`);
       });
       allMatches = allMatches.concat(clubMatches);
     });
@@ -134,13 +135,16 @@ const arrayAllclubsInitialised = footballGame.initialiseClubs(ArrayOfAllClubs);
 const allMatches = footballGame.createAllMatches(ArrayOfAllClubs);
 //console.log(`All Matches: ${JSON.stringify(allMatches)}`);
 
+console.log(allMatches);
+
+/*
 let rotatedArray = [...ArrayOfAllClubs];
 console.log(rotatedArray.join(','));
 for (let i = 0; i < ArrayOfAllClubs.length; i++) {
   rotatedArray = footballGame.rotateArray(rotatedArray);
   console.log(rotatedArray.join(','));
 }
-
+*/
 //footballGame.matchesToPlay2(1, ArrayOfAllClubs, allMatches);
 
 //Get a list of matches to play for a set period:

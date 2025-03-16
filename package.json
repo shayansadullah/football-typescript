@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "lite-server",
+    "watch-me": "npx tsc --watch",
     "tsconfig": "npx tsc -p tsconfig.json --noEmit -w",
     "prettier": "npx prettier . --write"
   },
